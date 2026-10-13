@@ -1,9 +1,14 @@
 function registerUser(payload) {
   const users = getUsers();
-  const existing = users.find((user) => user.username.toLowerCase() === payload.username.toLowerCase());
 
-  if (existing) {
+  const duplicateUsername = users.find((user) => user.username.toLowerCase() === payload.username.toLowerCase());
+  if (duplicateUsername) {
     throw new Error('Tên đăng nhập đã được sử dụng.');
+  }
+
+  const duplicateEmail = users.find((user) => user.email.toLowerCase() === payload.email.toLowerCase());
+  if (duplicateEmail) {
+    throw new Error('Email này đã được đăng ký bởi tài khoản khác.');
   }
 
   users.push({
@@ -246,12 +251,51 @@ function initAuthForms() {
   }
 }
 
+function initCheckoutPage() {
+  const checkoutItems = document.getElementById('checkout-items');
+  const checkoutTotal = document.getElementById('checkout-total');
+  if (!checkoutItems || !checkoutTotal) return;
+
+  const currentUser = getCurrentUser();
+  if (!currentUser) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  const cart = getCartItemDetails();
+  if (!cart.length) {
+    window.location.href = 'products.html';
+    return;
+  }
+
+  // Điền thông tin user vào form
+  const fullNameInput = document.querySelector('input[name="fullName"]');
+  const emailInput = document.querySelector('input[name="email"]');
+  if (fullNameInput) fullNameInput.value = currentUser.fullName;
+  if (emailInput) emailInput.value = currentUser.email;
+
+  // Hiển thị danh sách sản phẩm trong đơn hàng
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  checkoutItems.innerHTML = cart.map((item) => `
+    <div class="summary-row">
+      <span>${item.name} x${item.quantity}</span>
+      <strong>${formatCurrency(item.price * item.quantity)}</strong>
+    </div>
+  `).join('');
+  checkoutTotal.textContent = formatCurrency(total);
+}
+
 window.GEARZONE.registerUser = registerUser;
 window.GEARZONE.loginUser = loginUser;
 window.GEARZONE.createOrderFromCart = createOrderFromCart;
 window.GEARZONE.renderAccountPage = renderAccountPage;
 window.GEARZONE.initAuthForms = initAuthForms;
+window.GEARZONE.initCheckoutPage = initCheckoutPage;
 
 window.addEventListener('DOMContentLoaded', function () {
   initAuthForms();
+
+  if (document.getElementById('checkout-items')) {
+    initCheckoutPage();
+  }
 });

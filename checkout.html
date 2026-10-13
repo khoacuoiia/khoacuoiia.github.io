@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Thanh toán đơn hàng tại GEARZONE – Điền thông tin giao hàng và xác nhận đơn hàng của bạn." />
     <title>Thanh toán | GEARZONE</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -133,37 +134,5 @@
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/auth.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const currentUser = getCurrentUser();
-        if (!currentUser) {
-          window.location.href = 'login.html';
-          return;
-        }
-
-        const checkoutItems = document.getElementById('checkout-items');
-        const checkoutTotal = document.getElementById('checkout-total');
-        const cart = getCartItemDetails();
-
-        if (!cart.length) {
-          window.location.href = 'products.html';
-          return;
-        }
-
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        checkoutItems.innerHTML = cart.map((item) => `
-          <div class="summary-row">
-            <span>${item.name} x${item.quantity}</span>
-            <strong>${formatCurrency(item.price * item.quantity)}</strong>
-          </div>
-        `).join('');
-        checkoutTotal.textContent = formatCurrency(total);
-
-        const fullNameInput = document.querySelector('input[name="fullName"]');
-        const emailInput = document.querySelector('input[name="email"]');
-        fullNameInput.value = currentUser.fullName;
-        emailInput.value = currentUser.email;
-      });
-    </script>
   </body>
 </html>

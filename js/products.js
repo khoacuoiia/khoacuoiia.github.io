@@ -113,6 +113,14 @@ function initProductListingPage() {
 
   if (!grid) return;
 
+  // Render danh mục động từ data thay vì hardcode trong HTML
+  if (categoryFilter) {
+    const categories = window.GEARZONE_CATEGORIES || [];
+    categoryFilter.innerHTML =
+      '<option value="">Tất cả</option>' +
+      categories.map((cat) => `<option value="${cat.slug}">${cat.name}</option>`).join('');
+  }
+
   function render() {
     const category = getQueryParam('category') || categoryFilter.value || '';
     const filters = {
