@@ -215,11 +215,72 @@ function initProductDetailPage() {
     return;
   }
 
+  // Gallery section
+  const hasGallery = product.gallery && product.gallery.length > 1;
+  const galleryHtml = hasGallery ? `
+    <div class="detail-gallery">
+      <div class="gallery-main">
+        <img id="gallery-main-img" src="${product.gallery[0]}" alt="${product.name}">
+      </div>
+      <div class="gallery-thumbs">
+        ${product.gallery.map((img, i) => `
+          <button class="gallery-thumb ${i === 0 ? 'active' : ''}" data-gallery-index="${i}">
+            <img src="${img}" alt="${product.name} - Ảnh ${i + 1}">
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  ` : `
+    <div class="detail-image">
+      <img src="${product.image}" alt="${product.name}">
+    </div>
+  `;
+
+  // Specs table section
+  const hasSpecs = product.specs && product.specs.length > 0;
+  const specsHtml = hasSpecs ? `
+    <div class="product-specs-section">
+      <h2 class="specs-title">
+        <span class="specs-icon">📋</span>
+        Thông số kỹ thuật
+      </h2>
+      <div class="specs-table-wrapper">
+        <table class="specs-table">
+          <tbody>
+            ${product.specs.map((spec, i) => `
+              <tr class="${i % 2 === 0 ? 'even' : 'odd'}">
+                <td class="spec-label">${spec.label}</td>
+                <td class="spec-value">${spec.value}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  ` : '';
+
+  // Features section
+  const hasFeatures = product.features && product.features.length > 0;
+  const featuresHtml = hasFeatures ? `
+    <div class="product-features-section">
+      <h2 class="features-title">
+        <span class="features-icon">⭐</span>
+        Tính năng nổi bật
+      </h2>
+      <ul class="features-list">
+        ${product.features.map(feature => `
+          <li>
+            <span class="feature-check">✓</span>
+            <span>${feature}</span>
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+  ` : '';
+
   const productHtml = `
     <div class="product-detail-layout">
-      <div class="detail-image">
-        <img src="${product.image}" alt="${product.name}">
-      </div>
+      ${galleryHtml}
       <div class="detail-content">
         <span class="brand">${product.brand}</span>
         <h1>${product.name}</h1>
@@ -245,9 +306,24 @@ function initProductDetailPage() {
         </ul>
       </div>
     </div>
+    ${specsHtml}
+    ${featuresHtml}
   `;
 
   detailContainer.innerHTML = productHtml;
+
+  // Gallery thumbnail click handler
+  if (hasGallery) {
+    const mainImg = document.getElementById('gallery-main-img');
+    document.querySelectorAll('.gallery-thumb').forEach((thumb) => {
+      thumb.addEventListener('click', function () {
+        const index = Number(this.getAttribute('data-gallery-index'));
+        mainImg.src = product.gallery[index];
+        document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  }
 
   const quantityInput = document.getElementById('detail-quantity');
   document.querySelector('[data-qty-action="plus"]').addEventListener('click', () => {

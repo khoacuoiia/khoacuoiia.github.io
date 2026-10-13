@@ -258,6 +258,54 @@ window.GEARZONE_PRODUCTS = [
     description: 'Loa bàn làm việc với bass rõ, âm trung tốt và thiết kế tối giản, hiện đại.',
     stock: 21,
     code: 'STD-712'
+  },
+  {
+    id: 'mouse-03',
+    name: 'Logitech G304 LIGHTSPEED',
+    category: 'chuot',
+    categoryName: 'Chuột gaming',
+    brand: 'Logitech',
+    price: 799000,
+    originalPrice: 990000,
+    image: 'images/products/g304-main.jpg',
+    description: 'Chuột không dây nhỏ gọn, cảm biến HERO, DPI tối đa 12.000 và kết nối LIGHTSPEED. Phù hợp cho học tập, làm việc và chơi game.',
+    stock: 50,
+    code: 'G304-BLK',
+    gallery: [
+      'images/products/g304-main.jpg',
+      'images/products/g304-exploded.png',
+      'images/products/g304-360.png',
+      'images/products/g304-xray.jpg'
+    ],
+    specs: [
+      { label: 'Thương hiệu', value: 'Logitech' },
+      { label: 'Model', value: 'G304 LIGHTSPEED' },
+      { label: 'Loại sản phẩm', value: 'Chuột gaming không dây' },
+      { label: 'Kiểu kết nối', value: 'Không dây 2.4 GHz' },
+      { label: 'Công nghệ kết nối', value: 'LIGHTSPEED' },
+      { label: 'Cảm biến', value: 'HERO Optical' },
+      { label: 'Độ phân giải', value: '200–12.000 DPI' },
+      { label: 'Tốc độ tối đa', value: 'Trên 400 IPS' },
+      { label: 'Gia tốc tối đa', value: '40G' },
+      { label: 'Tần số phản hồi', value: '1000 Hz (1 ms)' },
+      { label: 'Số nút', value: '6 nút có thể lập trình' },
+      { label: 'Bộ nhớ tích hợp', value: 'Có' },
+      { label: 'Loại pin', value: '1 pin AA' },
+      { label: 'Thời lượng pin', value: 'Lên đến 250 giờ (chế độ hiệu suất)' },
+      { label: 'Kích thước (D × R × C)', value: '116,6 × 62,15 × 38,2 mm' },
+      { label: 'Trọng lượng', value: 'Khoảng 99 g (gồm pin AA)' },
+      { label: 'Đèn RGB', value: 'Không' },
+      { label: 'Phần mềm hỗ trợ', value: 'Logitech G HUB' },
+      { label: 'Hệ điều hành', value: 'Windows và macOS' },
+      { label: 'Bảo hành', value: '12 tháng' }
+    ],
+    features: [
+      'Cảm biến HERO: Theo dõi chuyển động chính xác, hỗ trợ điều chỉnh DPI phù hợp với nhu cầu sử dụng.',
+      'LIGHTSPEED: Kết nối không dây 2.4 GHz với tần số phản hồi lên đến 1000 Hz.',
+      'Tiết kiệm pin: Có chế độ hiệu suất và chế độ tiết kiệm năng lượng.',
+      '6 nút lập trình: Có thể tùy chỉnh chức năng thông qua phần mềm tương thích.',
+      'Bộ nhớ tích hợp: Lưu cấu hình chuột để thuận tiện khi chuyển đổi máy tính.'
+    ]
   }
 ];
 
