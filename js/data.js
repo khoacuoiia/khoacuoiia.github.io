@@ -1,326 +1,315 @@
-// ===================================================================
-// TERRAPULSE - Open Data Feeds & Real-Time Telemetry Pipeline
-// Integrates USGS Open GeoJSON, Open-Meteo Weather, Local Storage
-// ===================================================================
-
-const DEFAULT_INCIDENTS = [
+window.GEARZONE_PRODUCTS = [
   {
-    id: "tp-eq-001",
-    type: "earthquake",
-    title: "M 6.8 - Off the East Coast of Honshu, Japan",
-    coords: [38.297, 142.373],
-    magnitude: 6.8,
-    depth: 24.5,
-    severity: "CRITICAL",
-    time: "22 mins ago",
-    timestamp: Date.now() - 22 * 60 * 1000,
-    source: "USGS Seismic Network",
-    atRiskPop: "1,240,000",
-    radiusKm: 180,
-    triageNotes: "Tsunami advisory issued for Miyagi & Fukushima Prefectures. Coastal sea-wall gates engaged. Immediate high ground evacuation recommended for zone A.",
-    status: "active"
+    id: 'mouse-01',
+    name: 'Apex Pro Wireless Mouse',
+    category: 'chuot',
+    categoryName: 'Chuột máy tính',
+    brand: 'Apex',
+    price: 890000,
+    originalPrice: 1090000,
+    image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=900&q=80',
+    description: 'Chuột không dây siêu nhạy, phù hợp làm việc và chơi game với cảm giác cầm thoải mái.',
+    stock: 28,
+    code: 'APX-101'
   },
   {
-    id: "tp-st-002",
-    type: "cyclone",
-    title: "Super Typhoon 'VORTEX-9' - Cat 4 Approaching Gulf of Tonkin",
-    coords: [20.8449, 106.6881],
-    magnitude: "Cat 4 (220 km/h)",
-    depth: 0,
-    severity: "CRITICAL",
-    time: "1 hour ago",
-    timestamp: Date.now() - 60 * 60 * 1000,
-    source: "WMO & Open-Meteo Radar",
-    atRiskPop: "4,850,000",
-    radiusKm: 260,
-    triageNotes: "Extreme storm surge threat (2.8m - 3.5m) in coastal Hai Phong & Quang Ninh. 14,000 fishing vessels docked. Pre-emptive power grid stabilization underway.",
-    status: "active"
+    id: 'keyboard-01',
+    name: 'Nebula RGB Mechanical Keyboard',
+    category: 'ban-phim',
+    categoryName: 'Bàn phím',
+    brand: 'Nebula',
+    price: 1490000,
+    originalPrice: 1790000,
+    image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=900&q=80',
+    description: 'Bàn phím cơ RGB với switch nhẹ, phù hợp người dùng cần thao tác nhanh và đầy cảm giác.',
+    stock: 16,
+    code: 'NBL-222'
   },
   {
-    id: "tp-fl-003",
-    type: "flood",
-    title: "Severe Flash Flood & Landslide Alert - Yen Bai / Lao Cai Highlands",
-    coords: [21.7229, 104.9113],
-    magnitude: "Flash Index 8.9",
-    depth: 0,
-    severity: "CRITICAL",
-    time: "3 hours ago",
-    timestamp: Date.now() - 180 * 60 * 1000,
-    source: "Global Flood Awareness (GloFAS)",
-    atRiskPop: "320,000",
-    radiusKm: 75,
-    triageNotes: "Red River water levels exceeded Warning Level 3 by 1.4m. Multiple arterial bridges blocked by debris. Rubber rescue boats and air-drop food ration dispatched.",
-    status: "active"
+    id: 'headphone-01',
+    name: 'Echo Air Headset',
+    category: 'tai-nghe',
+    categoryName: 'Tai nghe',
+    brand: 'Echo',
+    price: 1290000,
+    originalPrice: 1590000,
+    image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=900&q=80',
+    description: 'Tai nghe gaming hít âm tốt, giảm ồn hiệu quả và khoá âm cho trải nghiệm chơi game.',
+    stock: 20,
+    code: 'ECO-440'
   },
   {
-    id: "tp-eq-004",
-    type: "earthquake",
-    title: "M 5.4 - Central Turkey Aftershock Cluster",
-    coords: [37.5753, 36.9228],
-    magnitude: 5.4,
-    depth: 10.0,
-    severity: "WARNING",
-    time: "4 hours ago",
-    timestamp: Date.now() - 240 * 60 * 1000,
-    source: "EMSC / USGS",
-    atRiskPop: "410,000",
-    radiusKm: 65,
-    triageNotes: "Shallow tectonic rupture. Structural inspection teams on standby for compromised masonry dwellings. No major casualty reported so far.",
-    status: "active"
+    id: 'mousepad-01',
+    name: 'Titan Desk Mat',
+    category: 'lot-chuot',
+    categoryName: 'Lót chuột',
+    brand: 'Titan',
+    price: 390000,
+    originalPrice: 480000,
+    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=80',
+    description: 'Lót chuột lớn, bền, mặt mịn giúp di chuyển chuột linh hoạt và ổn định hơn.',
+    stock: 32,
+    code: 'TTN-315'
   },
   {
-    id: "tp-wf-005",
-    type: "wildfire",
-    title: "Northern California Wildfire Complex - 12,000 Acres",
-    coords: [39.7596, -121.6219],
-    magnitude: "Level 4 Fire",
-    depth: 0,
-    severity: "WARNING",
-    time: "6 hours ago",
-    timestamp: Date.now() - 360 * 60 * 1000,
-    source: "NASA FIRMS Satellite",
-    atRiskPop: "85,000",
-    radiusKm: 45,
-    triageNotes: "High winds (45 mph) pushing smoke plumes south-east. Level 3 mandatory evacuation notice enacted for Butte County sectors 4 to 9.",
-    status: "active"
+    id: 'webcam-01',
+    name: 'FrameView 4K Webcam',
+    category: 'webcam',
+    categoryName: 'Webcam',
+    brand: 'FrameView',
+    price: 1190000,
+    originalPrice: 1450000,
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
+    description: 'Webcam Full HD/4K cho họp trực tuyến, stream và quay video chất lượng rõ nét.',
+    stock: 12,
+    code: 'FRM-004'
   },
   {
-    id: "tp-eq-006",
-    type: "earthquake",
-    title: "M 4.9 - Southern Sumatra, Indonesia",
-    coords: [-4.821, 103.112],
-    magnitude: 4.9,
-    depth: 54.0,
-    severity: "INFO",
-    time: "7 hours ago",
-    timestamp: Date.now() - 420 * 60 * 1000,
-    source: "BMKG Indonesia / USGS",
-    atRiskPop: "180,000",
-    radiusKm: 30,
-    triageNotes: "Deep subduction event. Light shaking reported along coastal Bengkulu. No tsunami risk detected.",
-    status: "monitoring"
+    id: 'hub-01',
+    name: 'Orbit USB-C Hub',
+    category: 'hub-usb',
+    categoryName: 'Hub USB và cáp kết nối',
+    brand: 'Orbit',
+    price: 690000,
+    originalPrice: 850000,
+    image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=80',
+    description: 'Hub đa cổng với USB-C, HDMI, USB-A và sạc nhanh, tiện lợi cho laptop văn phòng.',
+    stock: 25,
+    code: 'ORB-280'
+  },
+  {
+    id: 'stand-01',
+    name: 'FlexLift Laptop Stand',
+    category: 'gia-do-laptop',
+    categoryName: 'Giá đỡ laptop',
+    brand: 'FlexLift',
+    price: 560000,
+    originalPrice: 700000,
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80',
+    description: 'Giá đỡ laptop kim loại chắc chắn, giúp tăng góc nhìn và giảm mỏi cổ tay.',
+    stock: 18,
+    code: 'FLX-730'
+  },
+  {
+    id: 'cooling-01',
+    name: 'Breeze Cooler Pad',
+    category: 'de-tan-nhiet',
+    categoryName: 'Đế tản nhiệt',
+    brand: 'Breeze',
+    price: 630000,
+    originalPrice: 790000,
+    image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80',
+    description: 'Đế tản nhiệt thoáng khí, tăng hiệu suất làm mát cho máy tính xách tay khi sử dụng lâu.',
+    stock: 14,
+    code: 'BRZ-512'
+  },
+  {
+    id: 'storage-01',
+    name: 'Volt Mini SSD 1TB',
+    category: 'bo-nho',
+    categoryName: 'Thiết bị lưu trữ',
+    brand: 'Volt',
+    price: 1790000,
+    originalPrice: 2190000,
+    image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=900&q=80',
+    description: 'SSD gọn nhẹ, tốc độ đọc ghi nhanh, tối ưu khả năng mở ứng dụng và lưu trữ dữ liệu.',
+    stock: 26,
+    code: 'VLT-200'
+  },
+  {
+    id: 'speaker-01',
+    name: 'Pulse Mini Speaker',
+    category: 'loa',
+    categoryName: 'Loa',
+    brand: 'Pulse',
+    price: 499000,
+    originalPrice: 620000,
+    image: 'https://images.unsplash.com/photo-1518444065439-e933c06ce9cd?auto=format&fit=crop&w=900&q=80',
+    description: 'Loa mini với âm bass rõ, hỗ trợ nghe nhạc và hội thoại trong không gian làm việc nhỏ.',
+    stock: 33,
+    code: 'PLS-117'
+  },
+  {
+    id: 'mouse-02',
+    name: 'RapidClick X7',
+    category: 'chuot',
+    categoryName: 'Chuột máy tính',
+    brand: 'Rapid',
+    price: 520000,
+    originalPrice: 680000,
+    image: 'https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=900&q=80',
+    description: 'Chuột gaming nhẹ, độ chính xác cao, phù hợp fan esports và công việc văn phòng.',
+    stock: 35,
+    code: 'RAP-231'
+  },
+  {
+    id: 'keyboard-02',
+    name: 'LiteSwitch TKL',
+    category: 'ban-phim',
+    categoryName: 'Bàn phím',
+    brand: 'Lite',
+    price: 990000,
+    originalPrice: 1250000,
+    image: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=80',
+    description: 'Bàn phím compact tắt led, dễ mang theo, phù hợp học tập và làm việc với nhiều môi trường.',
+    stock: 29,
+    code: 'LIT-510'
+  },
+  {
+    id: 'headphone-02',
+    name: 'Luma ANC Headphone',
+    category: 'tai-nghe',
+    categoryName: 'Tai nghe',
+    brand: 'Luma',
+    price: 1690000,
+    originalPrice: 1990000,
+    image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=900&q=80',
+    description: 'Tai nghe chống ồn chủ động, chất lượng âm thanh rõ nét, đệm tai êm và bền.',
+    stock: 11,
+    code: 'LUM-610'
+  },
+  {
+    id: 'mousepad-02',
+    name: 'Storm Control Pad',
+    category: 'lot-chuot',
+    categoryName: 'Lót chuột',
+    brand: 'Storm',
+    price: 470000,
+    originalPrice: 590000,
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80',
+    description: 'Lót chuột chống trượt, chất liệu bền và dễ vệ sinh, phù hợp bàn làm việc lớn.',
+    stock: 24,
+    code: 'STM-331'
+  },
+  {
+    id: 'webcam-02',
+    name: 'Vision Cam Pro',
+    category: 'webcam',
+    categoryName: 'Webcam',
+    brand: 'Vision',
+    price: 760000,
+    originalPrice: 930000,
+    image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80',
+    description: 'Webcam Full HD đa chức năng, hỗ trợ làm việc từ xa và live stream ổn định.',
+    stock: 15,
+    code: 'VIS-788'
+  },
+  {
+    id: 'hub-02',
+    name: 'Dock Mini 8-in-1',
+    category: 'hub-usb',
+    categoryName: 'Hub USB và cáp kết nối',
+    brand: 'Dock',
+    price: 790000,
+    originalPrice: 980000,
+    image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80',
+    description: 'Dock đa cổng với 4 USB, HDMI, card reader và sạc nhanh tiện lợi cho văn phòng.',
+    stock: 17,
+    code: 'DCK-448'
+  },
+  {
+    id: 'stand-02',
+    name: 'AirLift Aluminum Stand',
+    category: 'gia-do-laptop',
+    categoryName: 'Giá đỡ laptop',
+    brand: 'AirLift',
+    price: 720000,
+    originalPrice: 880000,
+    image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80',
+    description: 'Giá đỡ nhôm nguyên khối, kiểu dáng hiện đại và phù hợp nhiều kích thước laptop.',
+    stock: 13,
+    code: 'AIR-279'
+  },
+  {
+    id: 'cooling-02',
+    name: 'Nova Cooling Pad',
+    category: 'de-tan-nhiet',
+    categoryName: 'Đế tản nhiệt',
+    brand: 'Nova',
+    price: 850000,
+    originalPrice: 990000,
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80',
+    description: 'Đế tản nhiệt hiện đại với quạt 2 tầng, giúp máy giảm nhiệt nhanh hơn khi chơi game.',
+    stock: 10,
+    code: 'NVA-910'
+  },
+  {
+    id: 'storage-02',
+    name: 'Aero NVMe 2TB',
+    category: 'bo-nho',
+    categoryName: 'Thiết bị lưu trữ',
+    brand: 'Aero',
+    price: 2490000,
+    originalPrice: 2890000,
+    image: 'https://images.unsplash.com/photo-1611078489935-0cb964de46d6?auto=format&fit=crop&w=900&q=80',
+    description: 'Ổ NVMe tốc độ cao, giảm thời gian khởi động hệ thống và xử lý file lớn hiệu quả.',
+    stock: 9,
+    code: 'AER-800'
+  },
+  {
+    id: 'speaker-02',
+    name: 'Studio Bass Speaker',
+    category: 'loa',
+    categoryName: 'Loa',
+    brand: 'Studio',
+    price: 690000,
+    originalPrice: 820000,
+    image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=900&q=80',
+    description: 'Loa bàn làm việc với bass rõ, âm trung tốt và thiết kế tối giản, hiện đại.',
+    stock: 21,
+    code: 'STD-712'
   }
 ];
 
-// Open Shelters POIs
-const DEFAULT_SHELTERS = [
-  { id: "sh-1", name: "Hai Phong Municipal Stadium Evacuation Center", coords: [20.856, 106.682], capacity: "3,500 people", status: "OPEN (Capacity: 45%)", phone: "+84 225 382 119" },
-  { id: "sh-2", name: "Yen Bai High Ground Provincial Arena", coords: [21.715, 104.902], capacity: "1,800 people", status: "OPEN (Capacity: 82%)", phone: "+84 216 385 241" },
-  { id: "sh-3", name: "Sendai Civic High School Tsunami Sanctuary", coords: [38.268, 140.869], capacity: "2,200 people", status: "OPEN (Capacity: 30%)", phone: "+81 22 214 1111" },
-  { id: "sh-4", name: "Chico Community Evacuation Complex", coords: [39.728, -121.837], capacity: "1,200 people", status: "OPEN (Capacity: 60%)", phone: "+1 530 895 4400" }
-];
-
-// Distributed Humanitarian Inventory
-const DEFAULT_RESOURCES = [
-  { id: "res-1", name: "High-Capacity Inflatable Rescue Boats (Zodiac)", category: "Mobility", count: 48, status: "available", icon: "ship" },
-  { id: "res-2", name: "Mobile Water Desalination & Filtration Units", category: "Sanitation", count: 120, status: "deployed", icon: "droplet" },
-  { id: "res-3", name: "Trauma Surgical Response Packs & Defibrillators", category: "Medical", count: 350, status: "available", icon: "cross" },
-  { id: "res-4", name: "Starlink Emergency Satellite Terminals (Off-Grid)", category: "Telecom", count: 25, status: "available", icon: "wifi" },
-  { id: "res-5", name: "Heavy-Duty Diesel Power Generators (50kVA)", category: "Energy", count: 40, status: "deployed", icon: "zap" },
-  { id: "res-6", name: "Thermal Imaging Search & Rescue Quadcopters", category: "Recon", count: 18, status: "available", icon: "camera" }
-];
-
-// Active Community SOS Queue
-const DEFAULT_SOS_QUEUE = [
+window.GEARZONE_CATEGORIES = [
   {
-    id: "sos-901",
-    sender: "Tran Van Minh (Hamlet 3, Yen Binh)",
-    location: "Yen Bai Province, Vietnam",
-    coords: [21.730, 104.920],
-    urgency: "P1", // P1: Critical, P2: Urgent, P3: Assistance
-    victims: "4 adults, 2 elderly, 1 infant",
-    message: "Flood water reached roof ceiling! Power and mobile signals intermittent. Running out of clean water. Need immediate boat evacuation.",
-    timestamp: Date.now() - 14 * 60 * 1000,
-    status: "DISPATCHING"
+    slug: 'chuot',
+    name: 'Chuột máy tính',
+    image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=900&q=80'
   },
   {
-    id: "sos-902",
-    sender: "Fukushima Fishery Cooperative Hub",
-    location: "Iwaki Coast, Japan",
-    coords: [37.050, 140.890],
-    urgency: "P2",
-    victims: "12 dockworkers",
-    message: "Harbor pier damaged by initial seismic wave. Need structural inspection and backup communications relay.",
-    timestamp: Date.now() - 38 * 60 * 1000,
-    status: "PENDING"
+    slug: 'ban-phim',
+    name: 'Bàn phím',
+    image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=900&q=80'
   },
   {
-    id: "sos-903",
-    sender: "Butte County Volunteer Fire Brigade 4",
-    location: "Paradise Outskirts, CA",
-    coords: [39.760, -121.610],
-    urgency: "P1",
-    victims: "8 firefighters, 15 residents",
-    message: "Flames jumped firebreak corridor on Route 70. Need aerial water drop coordination and N95 masks.",
-    timestamp: Date.now() - 52 * 60 * 1000,
-    status: "ASSIGNED"
+    slug: 'tai-nghe',
+    name: 'Tai nghe',
+    image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    slug: 'lot-chuot',
+    name: 'Lót chuột',
+    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    slug: 'webcam',
+    name: 'Webcam',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    slug: 'hub-usb',
+    name: 'Hub USB',
+    image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    slug: 'gia-do-laptop',
+    name: 'Giá đỡ laptop',
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    slug: 'de-tan-nhiet',
+    name: 'Đế tản nhiệt',
+    image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    slug: 'bo-nho',
+    name: 'Thiết bị lưu trữ',
+    image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=900&q=80'
+  },
+  {
+    slug: 'loa',
+    name: 'Loa',
+    image: 'https://images.unsplash.com/photo-1518444065439-e933c06ce9cd?auto=format&fit=crop&w=900&q=80'
   }
 ];
-
-class DataManager {
-  constructor() {
-    this.incidents = this.loadLocal('tp_incidents', DEFAULT_INCIDENTS);
-    this.shelters = this.loadLocal('tp_shelters', DEFAULT_SHELTERS);
-    this.resources = this.loadLocal('tp_resources', DEFAULT_RESOURCES);
-    this.sosQueue = this.loadLocal('tp_sos', DEFAULT_SOS_QUEUE);
-    this.listeners = [];
-  }
-
-  loadLocal(key, defaultVal) {
-    try {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : defaultVal;
-    } catch (e) {
-      return defaultVal;
-    }
-  }
-
-  saveLocal(key, val) {
-    try {
-      localStorage.setItem(key, JSON.stringify(val));
-    } catch (e) {
-      console.warn("Storage quota exceeded or disabled", e);
-    }
-  }
-
-  subscribe(callback) {
-    this.listeners.push(callback);
-  }
-
-  notify() {
-    this.listeners.forEach(cb => cb());
-  }
-
-  // Fetch real-time USGS GeoJSON earthquake feed
-  async fetchLiveUSGS() {
-    try {
-      const res = await fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson');
-      if (!res.ok) throw new Error("Network error fetching USGS feed");
-      const geojson = await res.json();
-      
-      const liveEvents = geojson.features.slice(0, 15).map(f => {
-        const mag = f.properties.mag || 0;
-        let severity = "INFO";
-        if (mag >= 6.0) severity = "CRITICAL";
-        else if (mag >= 4.5) severity = "WARNING";
-
-        const minutesAgo = Math.round((Date.now() - f.properties.time) / 60000);
-        const timeStr = minutesAgo < 60 ? `${minutesAgo} mins ago` : `${Math.floor(minutesAgo/60)} hours ago`;
-
-        return {
-          id: `usgs-${f.id}`,
-          type: "earthquake",
-          title: `M ${mag.toFixed(1)} - ${f.properties.place || "Unknown Region"}`,
-          coords: [f.geometry.coordinates[1], f.geometry.coordinates[0]],
-          magnitude: mag.toFixed(1),
-          depth: f.geometry.coordinates[2] || 10,
-          severity: severity,
-          time: timeStr,
-          timestamp: f.properties.time,
-          source: "USGS Real-Time Feed",
-          atRiskPop: `${Math.round(mag * 125000).toLocaleString()}`,
-          radiusKm: Math.round(Math.pow(10, (mag * 0.43)) * 0.8),
-          triageNotes: `Automated USGS seismic telemetry. Focal depth: ${f.geometry.coordinates[2]}km. Shake intensity PAGER rating: ${mag >= 6.0 ? 'Yellow/Orange' : 'Green'}.`,
-          status: "active"
-        };
-      });
-
-      // Merge unique real-time events with curated multi-hazard events
-      const merged = [...liveEvents, ...DEFAULT_INCIDENTS.filter(i => i.type !== 'earthquake')];
-      this.incidents = merged;
-      this.saveLocal('tp_incidents', this.incidents);
-      this.notify();
-      return { success: true, count: liveEvents.length };
-    } catch (err) {
-      console.warn("USGS feed offline or restricted by CORS, fallback to local database", err);
-      return { success: false, fallback: true };
-    }
-  }
-
-  // Fetch live weather from Open-Meteo API for coordinates
-  async fetchLiveWeather(lat, lon) {
-    try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,wind_direction_10m,surface_pressure`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Open-Meteo API unreachable");
-      const data = await res.json();
-      return {
-        success: true,
-        current: data.current
-      };
-    } catch (e) {
-      return {
-        success: false,
-        error: e.message
-      };
-    }
-  }
-
-  // Add new SOS Distress Signal
-  addSOS(sos) {
-    const newEntry = {
-      id: `sos-${Date.now().toString().slice(-4)}`,
-      timestamp: Date.now(),
-      status: "PENDING",
-      ...sos
-    };
-    this.sosQueue.unshift(newEntry);
-    this.saveLocal('tp_sos', this.sosQueue);
-    this.notify();
-    return newEntry;
-  }
-
-  // Update SOS status
-  updateSOSStatus(id, newStatus) {
-    const item = this.sosQueue.find(s => s.id === id);
-    if (item) {
-      item.status = newStatus;
-      this.saveLocal('tp_sos', this.sosQueue);
-      this.notify();
-    }
-  }
-
-  // Add simulated incident
-  addSimulatedIncident(incident) {
-    this.incidents.unshift(incident);
-    this.saveLocal('tp_incidents', this.incidents);
-    this.notify();
-  }
-
-  // Export current incidents as standard GeoJSON
-  exportGeoJSON() {
-    const features = this.incidents.map(inc => ({
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [inc.coords[1], inc.coords[0]]
-      },
-      properties: {
-        id: inc.id,
-        title: inc.title,
-        type: inc.type,
-        magnitude: inc.magnitude,
-        severity: inc.severity,
-        source: inc.source,
-        triageNotes: inc.triageNotes
-      }
-    }));
-
-    const geojson = {
-      type: "FeatureCollection",
-      generator: "TerraPulse Open Humanitarian OS - UN OCHA Standard",
-      timestamp: new Date().toISOString(),
-      features
-    };
-
-    const blob = new Blob([JSON.stringify(geojson, null, 2)], { type: "application/geo+json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `terrapulse_emergency_incidents_${Date.now()}.geojson`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-}
-
-window.dataManager = new DataManager();

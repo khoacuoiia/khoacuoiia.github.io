@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tất cả sản phẩm | GEARZONE</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="toast" class="toast"></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo">GEARZONE</a>
+        <form class="header-search" action="search.html" method="get">
+          <input type="search" name="q" placeholder="Tìm phụ kiện…" aria-label="Tìm kiếm" />
+          <button type="submit">Tìm</button>
+        </form>
+        <nav class="main-nav" aria-label="Điều hướng chính">
+          <a href="index.html">Trang chủ</a>
+          <a href="products.html">Sản phẩm</a>
+          <a href="categories.html">Danh mục</a>
+          <a href="account.html">Tài khoản</a>
+        </nav>
+        <div class="header-actions">
+          <a href="account.html" class="account-link">Tài khoản</a>
+          <a href="cart.html" class="cart-link">Giỏ hàng <span id="cart-count">0</span></a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container page-hero-inner">
+          <div>
+            <h1>Tất cả sản phẩm</h1>
+            <p>Khám phá bộ sưu tập phụ kiện laptop và PC đa dạng, phù hợp với học tập, làm việc và giải trí.</p>
+          </div>
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Danh sách sản phẩm GEARZONE" />
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="container">
+          <div class="toolbar">
+            <div class="filter-group">
+              <label for="category-filter">Danh mục</label>
+              <select id="category-filter">
+                <option value="">Tất cả</option>
+                <option value="chuot">Chuột máy tính</option>
+                <option value="ban-phim">Bàn phím</option>
+                <option value="tai-nghe">Tai nghe</option>
+                <option value="lot-chuot">Lót chuột</option>
+                <option value="webcam">Webcam</option>
+                <option value="hub-usb">Hub USB</option>
+                <option value="gia-do-laptop">Giá đỡ laptop</option>
+                <option value="de-tan-nhiet">Đế tản nhiệt</option>
+                <option value="bo-nho">Thiết bị lưu trữ</option>
+                <option value="loa">Loa</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="price-filter">Giá</label>
+              <select id="price-filter">
+                <option value="">Tất cả</option>
+                <option value="500000">Dưới 500.000đ</option>
+                <option value="1000000">Dưới 1.000.000đ</option>
+                <option value="2000000">Dưới 2.000.000đ</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="sort-filter">Sắp xếp</label>
+              <select id="sort-filter">
+                <option value="">Mặc định</option>
+                <option value="asc">Giá thấp đến cao</option>
+                <option value="desc">Giá cao đến thấp</option>
+              </select>
+            </div>
+            <div class="filter-meta" id="product-count">0 sản phẩm</div>
+          </div>
+
+          <div class="product-grid" id="product-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" style="background:#0f172a; color:#e2e8f0; padding: 32px 0 20px; margin-top: 40px;">
+      <div class="container" style="display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap:24px;">
+        <div>
+          <div class="logo" style="color:#fff;">GEARZONE</div>
+          <p style="color:#cbd5e1; margin-top:14px; line-height:1.7;">Nâng cấp góc máy – Bứt phá trải nghiệm với phụ kiện công nghệ phù hợp cho học tập, làm việc và giải trí.</p>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;">Liên kết</h3>
+          <div style="display:grid; gap:8px; color:#cbd5e1;">
+            <a href="index.html">Trang chủ</a>
+            <a href="products.html">Sản phẩm</a>
+            <a href="categories.html">Danh mục</a>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;">Hỗ trợ</h3>
+          <div style="display:grid; gap:8px; color:#cbd5e1;">
+            <a href="login.html">Đăng nhập</a>
+            <a href="register.html">Đăng ký</a>
+            <a href="cart.html">Giỏ hàng</a>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;">Liên hệ</h3>
+          <div style="display:grid; gap:8px; color:#cbd5e1;">
+            <span>Hotline: 1900 1234</span>
+            <span>Email: support@gearzone.vn</span>
+            <span>Địa chỉ: 123 Nguyễn Văn Linh, Hà Nội</span>
+          </div>
+        </div>
+      </div>
+      <div class="container" style="border-top:1px solid rgba(255,255,255,0.12); margin-top: 20px; padding-top: 18px; color:#cbd5e1; text-align:center;">
+        © 2026 GEARZONE. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>
