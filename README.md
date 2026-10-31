@@ -23,3 +23,4 @@ Trang web đang chạy trực tiếp trên GitHub Pages tại địa chỉ:
 - **HTML5 & CSS3**: Giao diện responsive tối ưu cho cả máy tính và điện thoại.
 - **JavaScript (ES6+)**: Xử lý logic giỏ hàng, lọc sản phẩm và lưu trữ trạng thái bằng `localStorage`.
 - **GitHub Pages**: Nền tảng triển khai tĩnh (Static Web Hosting).
+
