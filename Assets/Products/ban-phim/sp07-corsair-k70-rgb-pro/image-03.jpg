@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Security Verification</title>
+<script>
+  var host = window.location.hostname;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("merchant-domain").textContent = host;
+
+    var logo = document.getElementById("merchant-logo");
+    var logoSources = [
+      "https://" + host + "/assets/website_logo.png",
+      "https://" + host + "/assets/favicon_logo.png"
+    ];
+    var logoIndex = 0;
+
+    logo.onload = function () {
+      logo.hidden = false;
+    };
+    logo.onerror = function () {
+      logoIndex += 1;
+      if (logoIndex < logoSources.length) {
+        logo.src = logoSources[logoIndex];
+        return;
+      }
+      logo.onerror = null;
+      logo.hidden = true;
+      logo.removeAttribute("src");
+    };
+    logo.src = logoSources[0];
+
+    var troubleToggle = document.querySelector('.trouble-toggle');
+    var troubleContent = document.querySelector('.trouble-content');
+    troubleToggle.addEventListener('click', function () {
+      var expanded = troubleToggle.getAttribute('aria-expanded') === 'true';
+      troubleToggle.setAttribute('aria-expanded', String(!expanded));
+      troubleContent.hidden = expanded;
+    });
+  });
+</script>
+<style>
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+  }
+
+  .page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fdfdfd 0%, #f4f4f4 42%, #eaeaea 100%);
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 468px;
+    margin: 0 auto;
+    padding: 64px 20px 40px;
+  }
+
+  .logo { text-align: center; margin: 0 auto 28px; }
+  #merchant-logo { max-width: 220px; max-height: 72px; }
+  #merchant-domain {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5d2a;
+  }
+  #merchant-domain:empty { display: none; }
+
+  .card {
+    background: #ffffff;
+    border: 1px solid #e1e7ec;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    padding: 28px 28px 24px;
+    width: 100%;
+  }
+
+  .card h1 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: #1a1d21;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #6b7280;
+  }
+
+  .check-row {
+    margin-top: 16px;
+    background: #f3f6f8;
+    border: 1px solid #dce3ea;
+    border-radius: 4px;
+    padding: 16px;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    color: #3c434a;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .helper-text {
+    margin: 14px 0 0;
+    font-size: 13px;
+    color: #6b7280;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 20px 0 16px;
+  }
+
+  .trouble-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #1d6a94;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .chevron {
+    display: inline-flex;
+    transition: transform 0.15s ease;
+    transform: rotate(0deg);
+  }
+  .trouble-toggle[aria-expanded="true"] .chevron { transform: rotate(90deg); }
+
+  .trouble-content { margin-top: 14px; }
+  .trouble-content p {
+    margin: 0 0 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #5c6b76;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .trouble-content .support-ref {
+    margin-top: 2px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #1f2933;
+    font-weight: 500;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 28px 16px 24px; }
+    .card { padding: 22px 16px 18px; }
+    .card h1 { font-size: 22px; }
+    .check-row { padding: 14px 12px; min-height: 56px; }
+  }
+
+  @media (max-width: 360px) {
+    .wrap { padding: 20px 12px 20px; }
+    .card { padding: 20px 14px 16px; }
+    .check-row { padding: 12px 10px; }
+    .subtitle { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <div class="wrap">
+      <div class="logo">
+        <img id="merchant-logo" alt="Store logo" hidden/>
+        <strong id="merchant-domain"></strong>
+      </div>
+
+      <div class="card">
+        <h1>Almost there</h1>
+        <p class="subtitle">Complete the check below to continue</p>
+
+        <div class="check-row">
+          
+        </div>
+
+        <p class="helper-text">You'll continue automatically once it's complete</p>
+
+        <hr class="divider">
+
+        <button class="trouble-toggle" aria-expanded="false">
+          <span class="chevron">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Having trouble?
+        </button>
+
+        <div class="trouble-content" hidden>
+          <p>If a checkbox appears above, select it to continue.</p>
+          <p>If the check keeps returning, open this same page in an up-to-date browser. If you came from a social or email app, try your regular browser.</p>
+          <p>Still stuck? Contact the store using its published contact details. Share the reference below, the time and your browser.</p>
+          <p class="support-ref">Support reference: a52f6ad38e38fdae</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
