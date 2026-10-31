@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Không tìm thấy trang | GEARZONE</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="toast" class="toast"></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo">GEARZONE</a>
+        <form class="header-search" action="search.html" method="get">
+          <input type="search" name="q" placeholder="Tìm phụ kiện…" aria-label="Tìm kiếm" />
+          <button type="submit">Tìm</button>
+        </form>
+        <nav class="main-nav" aria-label="Điều hướng chính">
+          <a href="index.html">Trang chủ</a>
+          <a href="products.html">Sản phẩm</a>
+          <a href="categories.html">Danh mục</a>
+          <a href="account.html">Tài khoản</a>
+        </nav>
+        <div class="header-actions">
+          <a href="account.html" class="account-link">Tài khoản</a>
+          <a href="cart.html" class="cart-link">Giỏ hàng <span id="cart-count">0</span></a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container page-hero-inner">
+          <div>
+            <h1>404 - Không tìm thấy trang</h1>
+            <p>Trang bạn đang tìm kiếm không tồn tại hoặc đã được di chuyển.</p>
+            <div style="margin-top: 20px;">
+              <a href="index.html" class="btn btn-primary">Quay về trang chủ</a>
+              <a href="products.html" class="btn btn-secondary" style="margin-left: 10px;">Xem sản phẩm</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="404 GEARZONE" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" style="background:#0f172a; color:#e2e8f0; padding: 32px 0 20px; margin-top: 40px;">
+      <div class="container" style="border-top:1px solid rgba(255,255,255,0.12); margin-top: 20px; padding-top: 18px; color:#cbd5e1; text-align:center;">
+        © 2026 GEARZONE. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

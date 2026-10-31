@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh toán | GEARZONE</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="toast" class="toast"></div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo">GEARZONE</a>
+        <form class="header-search" action="search.html" method="get">
+          <input type="search" name="q" placeholder="Tìm phụ kiện…" aria-label="Tìm kiếm" />
+          <button type="submit">Tìm</button>
+        </form>
+        <nav class="main-nav" aria-label="Điều hướng chính">
+          <a href="index.html">Trang chủ</a>
+          <a href="products.html">Sản phẩm</a>
+          <a href="categories.html">Danh mục</a>
+          <a href="account.html">Tài khoản</a>
+        </nav>
+        <div class="header-actions">
+          <a href="account.html" class="account-link">Tài khoản</a>
+          <a href="cart.html" class="cart-link">Giỏ hàng <span id="cart-count">0</span></a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container page-hero-inner">
+          <div>
+            <h1>Thanh toán</h1>
+            <p>Điền thông tin giao hàng và xác nhận đơn hàng của bạn.</p>
+          </div>
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80" alt="Thanh toán GEARZONE" />
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="container cart-layout">
+          <div class="auth-box">
+            <form id="checkout-form">
+              <div class="form-row">
+                <div class="form-field">
+                  <label>Họ tên người nhận</label>
+                  <input type="text" name="fullName" placeholder="Nhập họ tên" value="" readonly />
+                </div>
+                <div class="form-field">
+                  <label>Số điện thoại</label>
+                  <input type="tel" name="phone" placeholder="0912 345 678" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label>Email</label>
+                  <input type="email" name="email" placeholder="name@example.com" readonly />
+                </div>
+                <div class="form-field">
+                  <label>Phương thức thanh toán</label>
+                  <select name="payment">
+                    <option value="Thanh toán khi nhận hàng">Thanh toán khi nhận hàng</option>
+                    <option value="Chuyển khoản minh họa">Chuyển khoản minh họa</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label>Địa chỉ giao hàng</label>
+                <textarea name="address" placeholder="Nhập địa chỉ chi tiết" required></textarea>
+              </div>
+
+              <div class="form-field">
+                <label>Ghi chú</label>
+                <textarea name="note" placeholder="Ghi chú cho đơn hàng (nếu có)"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Xác nhận đặt hàng</button>
+            </form>
+          </div>
+
+          <aside class="summary-card">
+            <h3>Đơn hàng của bạn</h3>
+            <div id="checkout-items"></div>
+            <div class="summary-row total"><span>Tổng tiền</span><strong id="checkout-total">0₫</strong></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" style="background:#0f172a; color:#e2e8f0; padding: 32px 0 20px; margin-top: 40px;">
+      <div class="container" style="display:grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap:24px;">
+        <div>
+          <div class="logo" style="color:#fff;">GEARZONE</div>
+          <p style="color:#cbd5e1; margin-top:14px; line-height:1.7;">Nâng cấp góc máy – Bứt phá trải nghiệm với phụ kiện công nghệ phù hợp cho học tập, làm việc và giải trí.</p>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;">Liên kết</h3>
+          <div style="display:grid; gap:8px; color:#cbd5e1;">
+            <a href="index.html">Trang chủ</a>
+            <a href="products.html">Sản phẩm</a>
+            <a href="categories.html">Danh mục</a>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;">Hỗ trợ</h3>
+          <div style="display:grid; gap:8px; color:#cbd5e1;">
+            <a href="login.html">Đăng nhập</a>
+            <a href="register.html">Đăng ký</a>
+            <a href="cart.html">Giỏ hàng</a>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin:0 0 12px;">Liên hệ</h3>
+          <div style="display:grid; gap:8px; color:#cbd5e1;">
+            <span>Hotline: 1900 1234</span>
+            <span>Email: support@gearzone.vn</span>
+            <span>Địa chỉ: 123 Nguyễn Văn Linh, Hà Nội</span>
+          </div>
+        </div>
+      </div>
+      <div class="container" style="border-top:1px solid rgba(255,255,255,0.12); margin-top: 20px; padding-top: 18px; color:#cbd5e1; text-align:center;">
+        © 2026 GEARZONE. All rights reserved.
+      </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const currentUser = getCurrentUser();
+        if (!currentUser) {
+          window.location.href = 'login.html';
+          return;
+        }
+
+        const checkoutItems = document.getElementById('checkout-items');
+        const checkoutTotal = document.getElementById('checkout-total');
+        const cart = getCartItemDetails();
+
+        if (!cart.length) {
+          window.location.href = 'products.html';
+          return;
+        }
+
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        checkoutItems.innerHTML = cart.map((item) => `
+          <div class="summary-row">
+            <span>${item.name} x${item.quantity}</span>
+            <strong>${formatCurrency(item.price * item.quantity)}</strong>
+          </div>
+        `).join('');
+        checkoutTotal.textContent = formatCurrency(total);
+
+        const fullNameInput = document.querySelector('input[name="fullName"]');
+        const emailInput = document.querySelector('input[name="email"]');
+        fullNameInput.value = currentUser.fullName;
+        emailInput.value = currentUser.email;
+      });
+    </script>
+  </body>
+</html>
